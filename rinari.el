@@ -198,7 +198,7 @@ argument allows editing of the test command arguments."
 		  (match-string 1 funname)))
 	 (path (buffer-file-name))
 	 (default-command (if fn
-			      (concat path " --name /" fn "/")
+			      (concat path (format " --drb -l %s" (line-number-at-pos)))
 			    path))
 	 (command (if edit-cmd-args
 		      (read-string "Run w/Compilation: " default-command)
@@ -592,7 +592,7 @@ behavior."
 (defun rinari-bind-key-to-func (key func)
   (dolist (prefix rinari-minor-mode-prefixes)
     (eval `(define-key rinari-minor-mode-map
-             ,(format "\C-c%s%s" prefix key) ,func))))
+             ,(format "\C-c%s" key) ,func))))
 
 (defvar rinari-minor-mode-keybindings
   '(("s" . 'rinari-script)              ("q" . 'rinari-sql)
