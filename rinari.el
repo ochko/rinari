@@ -197,8 +197,8 @@ argument allows editing of the test command arguments."
 		  (string-match "#\\(.*\\)" funname)
 		  (match-string 1 funname)))
 	 (path (buffer-file-name))
-	 (default-command (if fn
-			      (concat path (format " --drb -l %s" (line-number-at-pos)))
+        (default-command (if (> (line-number-at-pos) 1)
+			      (concat path (format " -l %s" (line-number-at-pos)))
 			    path))
 	 (command (if edit-cmd-args
 		      (read-string "Run w/Compilation: " default-command)
