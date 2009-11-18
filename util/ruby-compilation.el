@@ -111,7 +111,9 @@ exec-to-string command, but it works and seems fast"
   (let ((name (file-name-nondirectory (car (split-string cmd))))
 	(cmdlist (cons ruby-compilation-executable
                        (split-string (expand-file-name cmd)))))
-    (pop-to-buffer (ruby-compilation-do name cmdlist))))
+    (pop-to-buffer (ruby-compilation-do name cmdlist))
+		(other-window -1)
+		))
 
 ;;;###autoload
 (defun ruby-compilation-rake (&optional edit task env-vars)
