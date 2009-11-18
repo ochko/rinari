@@ -11,7 +11,7 @@
 (add-hook 'ruby-mode-hook (lambda ()
                             (when (string-match "_spec.rb$" buffer-file-name)
                               (set (make-local-variable 'ruby-compilation-executable)
-                                   "spec")
+                                   "./myspec")
                               (set (make-local-variable 'ruby-compilation-test-name-flag)
                                    "-l"))))
 
