@@ -200,7 +200,7 @@ argument allows editing of the test command arguments."
 		  (string-match "#\\(.*\\)" funname)
 		  (match-string 1 funname)))
 	 (path (buffer-file-name))
-	 (default-command (if fn
+	 (default-command (if (/= (line-number-at-pos) 1)
 			      (concat path (format " --drb -l %s" (line-number-at-pos)))
 			    path))
 	 (command (if edit-cmd-args
