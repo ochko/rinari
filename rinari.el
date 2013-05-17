@@ -615,6 +615,8 @@ renders and redirects to find the final controller or view."
      ("app/\\1$"                               . "spec/\\1_spec.rb")
      ("spec/views/\\1_spec.rb"                 . "app/views/\\1")
      ("spec/\\1_spec.rb"                       . "app/\\1.rb")
+     ("lib/\\1\\.rb"                           . "spec/lib/\\1_spec.rb")
+     ("spec/lib/\\1_spec.rb"                   . "lib/\\1")
      (t                                        . "spec/.*"))
     t)
    (fixture
