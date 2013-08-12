@@ -536,6 +536,7 @@ renders and redirects to find the final controller or view."
     (("app/controllers/\\1_controller.rb#\\2$" . "app/models/\\1.rb#\\2")
      ("app/views/\\1/.*"                       . "app/models/\\1.rb")
      ("app/helpers/\\1_helper.rb"              . "app/models/\\1.rb")
+     ("app/serializers/\\1_serializer.rb"      . "app/models/\\1.rb")
      ("db/migrate/.*create_\\1.rb"             . "app/models/\\1.rb")
      ("spec/models/\\1_spec.rb"                . "app/models/\\1.rb")
      ("spec/controllers/\\1_controller_spec.rb". "app/models/\\1.rb")
@@ -555,6 +556,7 @@ renders and redirects to find the final controller or view."
     (("app/models/\\1.rb"                      . "app/controllers/\\1_controller.rb")
      ("app/views/\\1/\\2\\..*"                 . "app/controllers/\\1_controller.rb#\\2")
      ("app/helpers/\\1_helper.rb"              . "app/controllers/\\1_controller.rb")
+     ("app/serializers/\\1_serializer.rb"      . "app/controllers/\\1_controller.rb")
      ("db/migrate/.*create_\\1.rb"             . "app/controllers/\\1_controller.rb")
      ("spec/models/\\1_spec.rb"                . "app/controllers/\\1_controller.rb")
      ("spec/controllers/\\1_spec.rb"           . "app/controllers/\\1.rb")
@@ -587,6 +589,7 @@ renders and redirects to find the final controller or view."
       . "app/views/\\1/\\2.*")
      ("app/controllers/\\1_controller.rb"      . "app/views/\\1/.*")
      ("app/helpers/\\1_helper.rb"              . "app/views/\\1/.*")
+     ("app/serializers/\\1_serializer.rb"      . "app/views/\\1/.*")
      ("db/migrate/.*create_\\1.rb"             . "app/views/\\1/.*")
      ("spec/models/\\1_spec.rb"                . "app/views/\\1/.*")
      ("spec/controllers/\\1_spec.rb"           . "app/views/\\1/.*")
@@ -600,6 +603,7 @@ renders and redirects to find the final controller or view."
    (test
     "t"
     (("app/models/\\1.rb#\\2$"                 . "test/unit/\\1_test.rb#test_\\2")
+     ("app/serializers/\\1_serializer.rb#\\2$" . "test/unit/\\1_serializer_test.rb#test_\\2")
      ("app/controllers/\\1.rb#\\2$"            . "test/functional/\\1_test.rb#test_\\2")
      ("app/views/\\1/_?\\2\\..*"               . "test/functional/\\1_controller_test.rb#test_\\2")
      ("app/helpers/\\1_helper.rb"              . "test/functional/\\1_controller_test.rb")
@@ -607,22 +611,6 @@ renders and redirects to find the final controller or view."
      ("test/functional/\\1_controller_test.rb" . "test/unit/\\1_test.rb")
      ("test/unit/\\1_test.rb"                  . "test/functional/\\1_controller_test.rb")
      (t                                        . "test/.*"))
-    t)
-   (serializer
-    "s"
-    (("app/controllers/\\1_controller.rb#\\2$" . "app/serializers/\\1.rb#\\2")
-     ("app/views/\\1/.*"                       . "app/serializers/\\1.rb")
-     ("app/helpers/\\1_helper.rb"              . "app/serializers/\\1.rb")
-     ("db/migrate/.*create_\\1.rb"             . "app/serializers/\\1.rb")
-     ("spec/models/\\1_spec.rb"                . "app/serializers/\\1.rb")
-     ("spec/controllers/\\1_controller_spec.rb". "app/serializers/\\1.rb")
-     ("spec/views/\\1/.*"                      . "app/serializers/\\1.rb")
-     ("spec/fixtures/\\1.yml"                  . "app/serializers/\\1.rb")
-     ("test/functional/\\1_controller_test.rb" . "app/serializers/\\1.rb")
-     ("test/unit/\\1_test.rb#test_\\2$"        . "app/serializers/\\1.rb#\\2")
-     ("test/unit/\\1_test.rb"                  . "app/serializers/\\1.rb")
-     ("test/fixtures/\\1.yml"                  . "app/serializers/\\1.rb")
-     (t                                        . "app/serializers/"))
     t)
    (rspec
     "r"
@@ -695,6 +683,22 @@ renders and redirects to find the final controller or view."
       (rinari-generate "migration"
                        (and (string-match ".*create_\\(.+?\\)\.rb" path)
                             (match-string 1 path)))))
+   (javascript
+    "j"
+    (("app/models/\\1.rb"                      . "app/assets/javascripts/models/\\1.coffee#\\1.js")
+     ("app/serializers/\\1.rb"                 . "app/assets/javascripts/models/\\1.coffee#\\1.js")
+     ("app/controllers/\\1_controller.rb"      . "app/assets/javascripts/controllers/\\1.coffee#\\1.js")
+     (t . "app/assets/javascripts/.*")
+     (t . "public/javascripts/.*")) nil)
+   (ruby
+    "b"
+    (("app/assets/javascripts/models/\\1.coffee"      . "app/models/\\1.rb")
+     ("app/assets/javascripts/models/\\1.js"          . "app/models/\\1.rb")
+     ("app/assets/javascripts/controllers/\\1.coffee" . "app/controllers/\\1_controller.rb")
+     ("app/assets/javascripts/controllers/\\1.js"     . "app/controllers/\\1_controller.rb")
+     ("app/assets/javascripts/routes/\\1.coffee"      . "app/controllers/\\1_controller.rb")
+     ("app/assets/javascripts/routes/\\1.js"          . "app/controllers/\\1_controller.rb")
+     (t . "app/models/.*")) nil)
    (cells
     "C"
     (("app/cells/\\1_cell.rb"                  . "app/cells/\\1/.*")
@@ -709,6 +713,7 @@ renders and redirects to find the final controller or view."
    (environment "e" ((t . "config/environments/")) nil)
    (application "a" ((t . "config/application.rb")) nil)
    (configuration "n" ((t . "config/")) nil)
+   (script "s" ((t . "script/")) nil)
    (lib "l" ((t . "lib/")) nil)
    (log "o" ((t . "log/")) nil)
    (worker "w" ((t . "lib/workers/")) nil)
@@ -717,8 +722,6 @@ renders and redirects to find the final controller or view."
                     (t . "app/assets/stylesheets/.*")) nil)
    (sass "Y" ((t . "public/stylesheets/sass/.*")
               (t . "app/stylesheets/.*")) nil)
-   (javascript "j" ((t . "public/javascripts/.*")
-                    (t . "app/assets/javascripts/.*")) nil)
    (plugin "u" ((t . "vendor/plugins/")) nil)
    (mailer "M" ((t . "app/mailers/")) nil)
    (file-in-project "f" ((t . ".*")) nil)
