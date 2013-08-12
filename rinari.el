@@ -608,6 +608,22 @@ renders and redirects to find the final controller or view."
      ("test/unit/\\1_test.rb"                  . "test/functional/\\1_controller_test.rb")
      (t                                        . "test/.*"))
     t)
+   (serializer
+    "s"
+    (("app/controllers/\\1_controller.rb#\\2$" . "app/serializers/\\1.rb#\\2")
+     ("app/views/\\1/.*"                       . "app/serializers/\\1.rb")
+     ("app/helpers/\\1_helper.rb"              . "app/serializers/\\1.rb")
+     ("db/migrate/.*create_\\1.rb"             . "app/serializers/\\1.rb")
+     ("spec/models/\\1_spec.rb"                . "app/serializers/\\1.rb")
+     ("spec/controllers/\\1_controller_spec.rb". "app/serializers/\\1.rb")
+     ("spec/views/\\1/.*"                      . "app/serializers/\\1.rb")
+     ("spec/fixtures/\\1.yml"                  . "app/serializers/\\1.rb")
+     ("test/functional/\\1_controller_test.rb" . "app/serializers/\\1.rb")
+     ("test/unit/\\1_test.rb#test_\\2$"        . "app/serializers/\\1.rb#\\2")
+     ("test/unit/\\1_test.rb"                  . "app/serializers/\\1.rb")
+     ("test/fixtures/\\1.yml"                  . "app/serializers/\\1.rb")
+     (t                                        . "app/serializers/"))
+    t)
    (rspec
     "r"
     (("app/views/\\1/\\2"                      . "spec/views/\\1/\\2_spec.rb")
@@ -693,7 +709,6 @@ renders and redirects to find the final controller or view."
    (environment "e" ((t . "config/environments/")) nil)
    (application "a" ((t . "config/application.rb")) nil)
    (configuration "n" ((t . "config/")) nil)
-   (script "s" ((t . "script/")) nil)
    (lib "l" ((t . "lib/")) nil)
    (log "o" ((t . "log/")) nil)
    (worker "w" ((t . "lib/workers/")) nil)
